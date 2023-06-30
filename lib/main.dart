@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:remoute_config_test/cubit/app_cubit.dart';
+import 'package:remoute_config_test/cubit/app_cubit/app_cubit.dart';
+import 'package:remoute_config_test/cubit/dummy_cubit/cubit/dummy_cubit.dart';
 import 'package:remoute_config_test/remote_config_services/remote_config_services.dart';
 import 'package:remoute_config_test/screens/dummy_screen.dart/dummy_screen.dart';
 import 'package:remoute_config_test/firebase_options.dart';
@@ -23,8 +24,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BlocProvider(
-        create: (context) => AppCubit(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => DummyCubit(),
+          ),
+          BlocProvider(
+            create: (context) => AppCubit(),
+          )
+        ],
         child: BlocBuilder<AppCubit, AppState>(
           builder: (context, state) {
             getCurrentScreen() {

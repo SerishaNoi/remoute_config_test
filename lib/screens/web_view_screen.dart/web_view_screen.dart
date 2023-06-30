@@ -40,6 +40,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
         body: WillPopScope(
           onWillPop: () => exitApp(context, inAppWebViewController),
           child: Stack(
+            fit: StackFit.expand,
             children: [
               InAppWebView(
                 initialUrlRequest: URLRequest(
@@ -49,10 +50,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
                   inAppWebViewController = controller;
                 },
                 pullToRefreshController: pullToRefreshController,
-                onLoadStart: (controller, url) {
-                  // проверяем на наличие ссылки в локал сторе, если нет выполняем сохранение
-                  // сделать метод в Кубите для этого
-                },
                 onLoadStop: (controller, url) => pullToRefreshController.endRefreshing(),
                 onProgressChanged: (controller, progress) {
                   if (progress == 100) {

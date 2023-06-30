@@ -3,11 +3,8 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remoute_config_test/constants/cubit_states.dart';
-import 'package:remoute_config_test/constants/json_routh.dart';
 import 'package:remoute_config_test/local_storage/local_storage.dart';
-import 'package:remoute_config_test/methods/calculate_calories.dart';
 import 'package:remoute_config_test/methods/check_device.dart';
-import 'package:remoute_config_test/methods/read_data_from_json.dart';
 import 'package:remoute_config_test/models/recomemded_dishes_model.dart';
 import 'package:remoute_config_test/remote_config_services/firevase_remote_config_keys.dart';
 import 'package:remoute_config_test/remote_config_services/remote_config_services.dart';
@@ -60,40 +57,5 @@ class AppCubit extends Cubit<AppState> {
     String urlLinkFromRemoteConfig = json.decode(jsonFromRemoteConfig)['link'];
 
     emit(state.copyWith(urlLink: urlLinkFromRemoteConfig));
-  }
-
-  calculateCaloriesToDayPart(double weight, double height, double age) async {
-    var totalValue = calculateCalories(weight, height, age);
-
-    double caloriesValueToBreakfast = totalValue * 0.3;
-    double caloriesValueToLunch = totalValue * 0.35;
-    double caloriesValueToSupper = totalValue * 0.25;
-
-    List<RecomendedDishesModel> dishesToBreakfastData = await readJson(JsonRouth.breakfast);
-    List<RecomendedDishesModel> dishesToLunchData = await readJson(JsonRouth.lunch);
-    List<RecomendedDishesModel> dishesToSupperData = await readJson(JsonRouth.supper);
-
-    List<RecomendedDishesModel> filtratedDishesToBreakfast = dishesToBreakfastData
-        .where((element) => element.calories <= caloriesValueToBreakfast)
-        .toList();
-
-    List<RecomendedDishesModel> filtratedDishesToLunch =
-        dishesToLunchData.where((element) => element.calories <= caloriesValueToLunch).toList();
-
-    List<RecomendedDishesModel> filtratedDishesToSupper =
-        dishesToSupperData.where((element) => element.calories <= caloriesValueToSupper).toList();
-
-    emit(
-      state.copyWith(
-        recomendedBreakfastDishes: filtratedDishesToBreakfast,
-        recomendedLunchDishes: filtratedDishesToLunch,
-        recomendedSupperDishes: filtratedDishesToSupper,
-        totalCaloriesScore: totalValue,
-        breakfastCalories: caloriesValueToBreakfast,
-        lunchCalories: caloriesValueToLunch,
-        supperCalories: caloriesValueToSupper,
-        isCalculated: true,
-      ),
-    );
   }
 }
