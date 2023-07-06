@@ -171,8 +171,6 @@ class _DummyScreenState extends State<DummyScreen> {
                         ],
                       ),
                     ),
-                    /*   isCalculated
-                      ?  */
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                       child: Column(
@@ -189,34 +187,41 @@ class _DummyScreenState extends State<DummyScreen> {
                             calories: breakfastCalories.toString(),
                             titleText: 'Your breakfast norm of calories is: ',
                           ),
-                          RecomendedDishesBox(
-                            title: 'Start your day with this breakfast:',
-                            recomendedDishes: recomendedBreakfastDishes[
-                                    Random().nextInt(recomendedBreakfastDishes.length)]
-                                .dishes,
-                          ),
+                          recomendedBreakfastDishes.isNotEmpty
+                              ? RecomendedDishesBox(
+                                  title: 'Start your day with this breakfast:',
+                                  recomendedDishes: recomendedBreakfastDishes[
+                                          Random().nextInt(recomendedBreakfastDishes.length)]
+                                      .dishes,
+                                )
+                              : const SizedBox(),
                           // take a random dishes from list of breakfast dishes closure to this calories value
                           CaloriesTextSpan(
                             calories: lunchCalories.toString(),
                             titleText: 'Your lunch norm of calories is: ',
                           ),
-                          RecomendedDishesBox(
-                            title: 'To your caloric value, you can take this dishes to Your lunch:',
-                            recomendedDishes: recomendedLunchDishes[
-                                    Random().nextInt(recomendedLunchDishes.length)]
-                                .dishes,
-                          ),
+                          recomendedLunchDishes.isNotEmpty
+                              ? RecomendedDishesBox(
+                                  title:
+                                      'To your caloric value, you can take this dishes to Your lunch:',
+                                  recomendedDishes: recomendedLunchDishes[
+                                          Random().nextInt(recomendedLunchDishes.length)]
+                                      .dishes,
+                                )
+                              : const SizedBox(),
                           // take a random dishes from list of lunch dishes closure to this calories value
                           CaloriesTextSpan(
                             calories: supperCalories.toString(),
                             titleText: 'Your supper norm of calories is: ',
                           ),
-                          RecomendedDishesBox(
-                            title: 'Don`t forget to finish your day with healthy supper:',
-                            recomendedDishes: recomendedSupperDishes[
-                                    Random().nextInt(recomendedSupperDishes.length)]
-                                .dishes,
-                          ),
+                          recomendedSupperDishes.isNotEmpty
+                              ? RecomendedDishesBox(
+                                  title: 'Don`t forget to finish your day with healthy supper:',
+                                  recomendedDishes: recomendedSupperDishes[
+                                          Random().nextInt(recomendedSupperDishes.length)]
+                                      .dishes,
+                                )
+                              : const SizedBox(),
                           // take a random dishes from list of supper dishes closure to this calories value
                         ],
                       ),

@@ -60,11 +60,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                   });
                 },
               ),
-              loadingProgress < 1
-                  ? const Center(child: CircularProgressIndicator())
-                  : Expanded(
-                      child: Container(),
-                    )
+              loadingProgress < 1 ? const Center(child: CircularProgressIndicator()) : Container()
             ],
           ),
         ),

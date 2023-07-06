@@ -9,9 +9,7 @@ part 'dummy_state.dart';
 part 'dummy_cubit.freezed.dart';
 
 class DummyCubit extends Cubit<DummyState> {
-  DummyCubit() : super(const DummyState.initial()) {
-    print('adsasdasd');
-  }
+  DummyCubit() : super(const DummyState.initial());
 
   void calculateCaloriesToDayPart({
     required double weight,
