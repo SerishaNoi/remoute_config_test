@@ -7,6 +7,9 @@ import 'package:remoute_config_test/methods/calculate_calories.dart';
 import 'package:remoute_config_test/screens/dummy_screen.dart/widgets/recomended_dishes_box.dart';
 import 'package:remoute_config_test/screens/dummy_screen.dart/widgets/test_spans_widget.dart';
 
+const String notHaveRecomendedDishesMEsaage =
+    'Sorry 🙃, we don`t have recomended dishes to this calories value';
+
 class DummyScreen extends StatefulWidget {
   const DummyScreen({super.key});
 
@@ -187,45 +190,45 @@ class _DummyScreenState extends State<DummyScreen> {
                             calories: breakfastCalories.toString(),
                             titleText: 'Your breakfast norm of calories is: ',
                           ),
-                          recomendedBreakfastDishes.isNotEmpty
-                              ? RecomendedDishesBox(
-                                  title: 'Start your day with this breakfast:',
-                                  recomendedDishes: recomendedBreakfastDishes[
-                                          Random().nextInt(recomendedBreakfastDishes.length)]
-                                      .dishes,
-                                )
-                              : const SizedBox(),
+                          RecomendedDishesBox(
+                            title: 'Start your day with this breakfast:',
+                            recomendedDishes: recomendedBreakfastDishes.isNotEmpty
+                                ? recomendedBreakfastDishes[
+                                        Random().nextInt(recomendedBreakfastDishes.length)]
+                                    .dishes
+                                : notHaveRecomendedDishesMEsaage,
+                          ),
                           // take a random dishes from list of breakfast dishes closure to this calories value
                           CaloriesTextSpan(
                             calories: lunchCalories.toString(),
                             titleText: 'Your lunch norm of calories is: ',
                           ),
-                          recomendedLunchDishes.isNotEmpty
-                              ? RecomendedDishesBox(
-                                  title:
-                                      'To your caloric value, you can take this dishes to Your lunch:',
-                                  recomendedDishes: recomendedLunchDishes[
-                                          Random().nextInt(recomendedLunchDishes.length)]
-                                      .dishes,
-                                )
-                              : const SizedBox(),
+                          RecomendedDishesBox(
+                            title: 'To your caloric value, you can take this dishes to Your lunch:',
+                            recomendedDishes: recomendedLunchDishes.isNotEmpty
+                                ? recomendedLunchDishes[
+                                        Random().nextInt(recomendedLunchDishes.length)]
+                                    .dishes
+                                : notHaveRecomendedDishesMEsaage,
+                          ),
+
                           // take a random dishes from list of lunch dishes closure to this calories value
                           CaloriesTextSpan(
                             calories: supperCalories.toString(),
                             titleText: 'Your supper norm of calories is: ',
                           ),
-                          recomendedSupperDishes.isNotEmpty
-                              ? RecomendedDishesBox(
-                                  title: 'Don`t forget to finish your day with healthy supper:',
-                                  recomendedDishes: recomendedSupperDishes[
-                                          Random().nextInt(recomendedSupperDishes.length)]
-                                      .dishes,
-                                )
-                              : const SizedBox(),
+                          RecomendedDishesBox(
+                            title: 'Don`t forget to finish your day with healthy supper:',
+                            recomendedDishes: recomendedSupperDishes.isNotEmpty
+                                ? recomendedSupperDishes[
+                                        Random().nextInt(recomendedSupperDishes.length)]
+                                    .dishes
+                                : notHaveRecomendedDishesMEsaage,
+                          ),
                           // take a random dishes from list of supper dishes closure to this calories value
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
