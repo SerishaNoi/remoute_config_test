@@ -16,7 +16,11 @@ class RecomendedDishesBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 1),
+          color: const Color(0xFF302f38),
+          border: Border.all(
+            width: 1.4,
+            color: const Color(0xFF36B163),
+          ),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -26,16 +30,22 @@ class RecomendedDishesBox extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
               decoration: BoxDecoration(
-                border: Border.all(width: 1),
+                border: Border.all(
+                  width: 1,
+                  color: const Color(0xFF36B163),
+                ),
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(7),
-                  topRight: Radius.circular(7),
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
                 ),
               ),
               child: Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.w400, color: Colors.black87),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFFf2c063),
+                ),
               ),
             ),
             Padding(
@@ -43,7 +53,7 @@ class RecomendedDishesBox extends StatelessWidget {
               child: Text(
                 recomendedDishes,
                 style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w400, color: Colors.black87),
+                    fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xFFeda115)),
               ),
             ),
           ],
