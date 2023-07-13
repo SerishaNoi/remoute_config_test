@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remoute_config_test/constants/cubit_states.dart';
 import 'package:remoute_config_test/local_storage/local_storage.dart';
 import 'package:remoute_config_test/methods/check_device.dart';
 import 'package:remoute_config_test/models/recomemded_dishes_model.dart';
-import 'package:remoute_config_test/remote_config_services/firevase_remote_config_keys.dart';
 import 'package:remoute_config_test/remote_config_services/remote_config_services.dart';
 
 part 'app_state.dart';
@@ -53,9 +50,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   _getLinkFromFirebase() {
-    var jsonFromRemoteConfig = RomoteConfigServices().getString(FirebaseRemoteConfigKeys.urlLink);
-    String urlLinkFromRemoteConfig = json.decode(jsonFromRemoteConfig)['link'];
+    var jsonFromRemoteConfig = RomoteConfigServices().getString('url');
 
-    emit(state.copyWith(urlLink: urlLinkFromRemoteConfig));
+    emit(state.copyWith(urlLink: jsonFromRemoteConfig));
   }
 }

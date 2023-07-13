@@ -6,15 +6,14 @@ import 'package:remoute_config_test/cubit/app_cubit/app_cubit.dart';
 import 'package:remoute_config_test/cubit/dummy_cubit/cubit/dummy_cubit.dart';
 import 'package:remoute_config_test/remote_config_services/remote_config_services.dart';
 import 'package:remoute_config_test/screens/dummy_screen.dart/dummy_screen.dart';
-import 'package:remoute_config_test/firebase_options.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:remoute_config_test/screens/internet_errore_screen/internet_errore_screen.dart';
 import 'package:remoute_config_test/screens/web_view_screen.dart/web_view_screen.dart';
 
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await Hive.initFlutter();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await RomoteConfigServices().init();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());

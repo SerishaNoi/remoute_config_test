@@ -5,6 +5,8 @@ class RomoteConfigServices {
 
   String getString(String key) => firebaseRemoteConfig.getString(key);
 
+  Map<String, RemoteConfigValue> getAll() => firebaseRemoteConfig.getAll();
+
   Future<void> init() async {
     await _setConfigSettings();
     await _fetchAndActivate();
