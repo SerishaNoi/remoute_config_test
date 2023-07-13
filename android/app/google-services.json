@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "930675311111",
-    "project_id": "remouteconfigtest",
-    "storage_bucket": "remouteconfigtest.appspot.com"
+    "project_number": "684069406354",
+    "project_id": "vifin-2f988",
+    "storage_bucket": "vifin-2f988.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930675311111:android:899df9fd54a4aae026e0a2",
+        "mobilesdk_app_id": "1:684069406354:android:d1d15d7ef61d93dd6b884b",
         "android_client_info": {
-          "package_name": "com.example.remoute_config_test"
+          "package_name": "fittness.caouchspf"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930675311111-if83ouiq7g3u2uaq6lr9viom1pmem9jv.apps.googleusercontent.com",
+          "client_id": "684069406354-48na5rha0ljt2a73skmimpflgl830t75.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCAmHTKwj56Wx36vnLeOcyWEoMYY18DZV4"
+          "current_key": "AIzaSyDq543GlVm4YRW5vepmhYtYZEFPip6xRvw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930675311111-if83ouiq7g3u2uaq6lr9viom1pmem9jv.apps.googleusercontent.com",
+              "client_id": "684069406354-48na5rha0ljt2a73skmimpflgl830t75.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

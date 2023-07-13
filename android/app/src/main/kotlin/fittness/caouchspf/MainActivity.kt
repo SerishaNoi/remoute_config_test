@@ -1,4 +1,4 @@
-package com.example.remoute_config_test
+package fittness.caouchspf
 
 import io.flutter.embedding.android.FlutterActivity
 

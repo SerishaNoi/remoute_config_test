@@ -5,7 +5,7 @@ Future<bool> checkDevice() async {
   var androidInfo = await deviceInfoPlugin.androidInfo;
 
   // add check to empty local link and emulator
-  if (androidInfo.brand == 'google' || androidInfo.isPhysicalDevice == false) {
+  if (androidInfo.brand == 'google' || !androidInfo.isPhysicalDevice) {
     return true;
   }
 
