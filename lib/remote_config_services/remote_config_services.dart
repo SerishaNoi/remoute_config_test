@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class RomoteConfigServices {
@@ -22,12 +23,17 @@ class RomoteConfigServices {
   }
 
   Future<void> _fetchAndActivate() async {
-    bool updated = await firebaseRemoteConfig.fetchAndActivate();
+    final result = await Connectivity().checkConnectivity();
+    
+    if (result != ConnectivityResult.none) {
+      bool updated = await firebaseRemoteConfig.fetchAndActivate();
 
-    if (updated == true) {
-      print('configuration has been updated');
-    } else {
-      print('configuration has not been updated');
+      if (updated == true) {
+        print('configuration has been updated');
+      } else {
+        print('configuration has not been updated');
+      }
     }
+    print('configuration has not been updated');
   }
 }

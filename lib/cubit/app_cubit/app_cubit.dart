@@ -14,26 +14,33 @@ class AppCubit extends Cubit<AppState> {
   }
 
   startApp() async {
-    // Проверяем локально сохраненную сылку
-    if (await _checkLocalSevedLink() == true) {
-      final result = await Connectivity().checkConnectivity();
-      // если девайс не подключен к интернету показываем экран ошибки интернет соединения
-      if (result == ConnectivityResult.none) {
-        emit(state.copyWith(isNeedToShowInternetErroreScreen: true));
-      } else {
-        emit(state.copyWith(isNeedToShowWebViewScreen: true, urlLink: state.urlLink));
-      }
+    final result = await Connectivity().checkConnectivity();
+    // если девайс не подключен к интернету показываем экран ошибки интернет соединения
+    if (result == ConnectivityResult.none) {
+      emit(state.copyWith(isNeedToShowInternetErroreScreen: true));
     } else {
-      // Если в локальном хранилище нету ссылки обращаемся к Firebase
-      _getLinkFromFirebase();
-      // Проверяем девайс, это эмулятор?, это смартфон от гугл, если нет то сохраняем ссылку локально и показываем вебвью
-      if (await checkDevice() == false) {
-        LocalStorage().storeLink('link', state.urlLink);
-
-        emit(state.copyWith(state: CubitState.loading, isNeedToShowWebViewScreen: true));
+      // Проверяем локально сохраненную сылку
+      if (await _checkLocalSevedLink() == true) {
+        emit(state.copyWith(isNeedToShowWebViewScreen: true, urlLink: state.urlLink));
       } else {
-        // если нет то показываем экран заглушку
-        emit(state.copyWith(isNeedToShowDummyScreen: true, isLoading: false));
+        // Если в локальном хранилище нету ссылки обращаемся к Firebase
+        // _getLinkFromFirebase();
+        var jsonFromRemoteConfig = RomoteConfigServices().getString('url');
+
+        if (jsonFromRemoteConfig.isEmpty || jsonFromRemoteConfig == "") {
+          emit(state.copyWith(isNeedToShowDummyScreen: true, isLoading: false));
+        } else {
+          emit(state.copyWith(urlLink: jsonFromRemoteConfig));
+          // Проверяем девайс, это эмулятор?, это смартфон от гугл?, если нет то сохраняем ссылку локально и показываем вебвью
+          if (await checkDevice() == false) {
+            LocalStorage().storeLink('link', state.urlLink);
+
+            emit(state.copyWith(state: CubitState.loading, isNeedToShowWebViewScreen: true));
+          } else {
+            // если нет то показываем экран заглушку
+            emit(state.copyWith(isNeedToShowDummyScreen: true, isLoading: false));
+          }
+        }
       }
     }
   }
@@ -41,7 +48,7 @@ class AppCubit extends Cubit<AppState> {
   Future<bool> _checkLocalSevedLink() async {
     var savedLink = await LocalStorage().getLink('link');
 
-    if (savedLink != null) {
+    if (savedLink != null && savedLink != "") {
       emit(state.copyWith(urlLink: savedLink));
       return true;
     }
@@ -49,9 +56,13 @@ class AppCubit extends Cubit<AppState> {
     return false;
   }
 
-  _getLinkFromFirebase() {
-    var jsonFromRemoteConfig = RomoteConfigServices().getString('url');
+  // _getLinkFromFirebase() {
+  //   var jsonFromRemoteConfig = RomoteConfigServices().getString('url');
 
-    emit(state.copyWith(urlLink: jsonFromRemoteConfig));
-  }
+  //   if (jsonFromRemoteConfig.isEmpty || jsonFromRemoteConfig == "") {
+  //     emit(state.copyWith(isNeedToShowDummyScreen: true, isLoading: false));
+  //   } else {
+  //     emit(state.copyWith(urlLink: jsonFromRemoteConfig));
+  //   }
+  // }
 }
